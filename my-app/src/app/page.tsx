@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import "@/app/style.css";
 export default function Home() {
   const [searchValue, setSearchValue] = useState("");
   const [weatherData, setweatherData] = useState("");
