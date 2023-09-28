@@ -1,5 +1,6 @@
 "use client";
 
+import { error } from "console";
 import { useEffect, useState } from "react";
 export default function Home() {
   const [searchValue, setSearchValue] = useState("");
@@ -17,13 +18,29 @@ export default function Home() {
       console.log(error);
     }
   }
+  async function fetchindCoordinates(latitude: number, longitude: number) {
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/weather?latitude=${latitude}&longitude=${longitude}`
+      );
+      const jsonData = (await res.json()).data;
+      setweatherData(jsonData);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
-    fetchData(city);
-  }, [city]);
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const { latitude, longitude } = position.coords;
+        fetchindCoordinates(latitude, longitude);
+      });
+    }
+  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setCity(searchValue);
+    fetchData(searchValue);
   };
   const temperatureInFahrenheit = weatherData?.main?.temp;
   const temperatureInCelsius = (temperatureInFahrenheit - 273.15).toFixed(2);
