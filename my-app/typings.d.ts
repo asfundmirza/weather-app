@@ -1,15 +1,11 @@
 export interface weatherType {
-  main: Main;
+  main: {
+    temp: number;
+  };
   message: string;
-  weather: Weather[];
+  weather: Array<{
+    icon: string;
+    description: string;
+  }>;
   name: string;
-}
-
-interface Main {
-  temp: number;
-}
-
-interface Weather {
-  icon: string;
-  description: string;
 }
