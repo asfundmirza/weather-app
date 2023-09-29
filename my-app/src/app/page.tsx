@@ -52,6 +52,7 @@ export default function Home() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     fetchData(searchValue);
+    setSearchValue("");
   };
   const temperatureInFahrenheit = weatherData?.main?.temp;
   const temperatureInCelsius = (temperatureInFahrenheit - 273.15).toFixed(2);
@@ -65,6 +66,7 @@ export default function Home() {
           >
             <input
               type="text"
+              value={searchValue}
               placeholder="City Name"
               onChange={(e) => setSearchValue(e.target.value)}
               className="p-4 rounded-full text-lg outline-none w-full "
