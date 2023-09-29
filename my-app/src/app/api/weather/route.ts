@@ -6,7 +6,7 @@ export async function GET(request: any) {
   const { searchParams } = new URL(request.url);
   const address = searchParams.get("address");
   const latitude = searchParams.get("latitude");
-  const longitutde = searchParams.get("longitutde");
+  const longitude = searchParams.get("longitude");
 
   let url = "";
 
@@ -17,7 +17,7 @@ export async function GET(request: any) {
       "&appid=" +
       "bc450695b5ce8bbd421f493b035030a2";
   } else {
-    url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitutde}&appid=bc450695b5ce8bbd421f493b035030a2`;
+    url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=bc450695b5ce8bbd421f493b035030a2`;
   }
 
   const res = await fetch(url);
