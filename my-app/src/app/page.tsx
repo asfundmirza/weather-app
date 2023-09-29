@@ -1,11 +1,22 @@
 "use client";
 
-import { error } from "console";
 import { useEffect, useState } from "react";
+import { weatherType } from "../../typings";
 export default function Home() {
   const [searchValue, setSearchValue] = useState("");
-  const [weatherData, setweatherData] = useState("");
-  const [city, setCity] = useState("lahore");
+  const [weatherData, setweatherData] = useState<weatherType>({
+    main: {
+      temp: 0,
+    },
+    message: "",
+    weather: [
+      {
+        icon: "",
+        description: "",
+      },
+    ],
+    name: "",
+  });
 
   async function fetchData(cityName: string) {
     try {
@@ -73,7 +84,9 @@ export default function Home() {
             </div>
           ) : (
             <>
-              {weatherData && weatherData?.weather?.length > 0 ? (
+              {weatherData &&
+              weatherData?.weather?.length > 0 &&
+              weatherData?.main?.temp ? (
                 <>
                   <div className="flex md:flex-row flex-col justify-between items-center">
                     <div className="relative">
