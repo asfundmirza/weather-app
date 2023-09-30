@@ -13,7 +13,7 @@ export default function Home() {
 
   async function fetchData(cityName: string) {
     try {
-      const res = await fetch(`/api/weather?address=${cityName}`);
+      const res = await fetch(`api/weather?address=${cityName}`);
       const jsonData = (await res.json()).data;
       setweatherData(jsonData);
     } catch (error) {
@@ -24,7 +24,7 @@ export default function Home() {
   async function fetchindCoordinates(latitude: number, longitude: number) {
     try {
       const res = await fetch(
-        `/api/weather?latitude=${latitude}&longitude=${longitude}`
+        `api/weather?latitude=${latitude}&longitude=${longitude}`
       );
       const jsonData = (await res.json()).data;
       setweatherData(jsonData);
@@ -72,6 +72,7 @@ export default function Home() {
               type="text"
               value={searchValue}
               autoFocus
+              required
               placeholder="City Name"
               onChange={(e) => setSearchValue(e.target.value)}
               className="p-4 rounded-full text-lg outline-none w-full "
