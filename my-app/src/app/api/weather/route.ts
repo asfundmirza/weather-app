@@ -7,17 +7,20 @@ export async function GET(request: any) {
   const address = searchParams.get("address");
   const latitude = searchParams.get("latitude");
   const longitude = searchParams.get("longitude");
-
+  const addressApiUrl = process.env.NEXT_PUBLIC_API_ADDRESS;
+  const latLongApiUrl = process.env.NEXT_PUBLIC_API_LAT_LONG;
+  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
   let url = "";
 
   if (address) {
-    url =
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
-      address +
-      "&appid=" +
-      "bc450695b5ce8bbd421f493b035030a2";
+    url = `${addressApiUrl}?q=${address}&appid=${apiKey}`;
+
+    // "https://api.openweathermap.org/data/2.5/weather?q=" +
+    //   address +
+    //   "&appid=" +
+    //   "bc450695b5ce8bbd421f493b035030a2";
   } else {
-    url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=bc450695b5ce8bbd421f493b035030a2`;
+    url = `${latLongApiUrl}?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
   }
 
   const res = await fetch(url);

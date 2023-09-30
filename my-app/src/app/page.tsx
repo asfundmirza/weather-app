@@ -7,11 +7,13 @@ export default function Home() {
   const [locationAllowed, setLocationAllowed] = useState(true);
   const [weatherData, setweatherData] = useState<weatherType>();
 
+  const addressApiUrl = process.env.NEXT_PUBLIC_API_ADDRESS;
+  const latLongApiUrl = process.env.NEXT_PUBLIC_API_LAT_LONG;
+  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+
   async function fetchData(cityName: string) {
     try {
-      const res = await fetch(
-        "http://localhost:3000/api/weather?address=" + cityName
-      );
+      const res = await fetch(`/api/weather?address=${cityName}`);
       const jsonData = (await res.json()).data;
       setweatherData(jsonData);
     } catch (error) {
@@ -22,7 +24,7 @@ export default function Home() {
   async function fetchindCoordinates(latitude: number, longitude: number) {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/weather?latitude=${latitude}&longitude=${longitude}`
+        `/api/weather?latitude=${latitude}&longitude=${longitude}`
       );
       const jsonData = (await res.json()).data;
       setweatherData(jsonData);
